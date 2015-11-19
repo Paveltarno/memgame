@@ -1,0 +1,11 @@
+{
+  "name": "memgame",
+  "version": "1.0.0",
+  "description": "Memory game by node<3react",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Pavel Tarno",
+  "license": "ISC"
+}
