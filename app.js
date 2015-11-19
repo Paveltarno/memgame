@@ -37,3 +37,45 @@ function handler(req, res) {
             });
     }
 }
+
+class Player{
+  constructor(id, name){
+    this.id;
+    this.name;
+  }
+}
+
+// Game manager
+var = gameManager {
+  let sockets = new Map();
+  let players = new Map();
+
+  return {
+    addPlayer: function(socket, player){
+      // Create a server player which holds both player and socket
+      sockets.set(socket.id, socket);
+      players.set(socket.id, player);
+    }
+
+    removePlayer: function(socket){
+      sockets.delete(socket.id);
+      players.delete(socket.id)
+    }
+
+    getSocket: function(id){
+      sockets.get(id);
+    }
+
+    getPlayer: function(id){
+      players.get(id);
+    }
+
+    listPlayers: function{
+      // TODO: Continue from here
+    }
+  }
+}
+
+var players = () => {
+
+}();
