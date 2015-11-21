@@ -59,6 +59,7 @@ var playerManager = (function(){
       // Create a server player which holds both player and socket
       sockets.set(socket.id, socket);
       players.set(socket.id, player);
+      debugger;
     },
 
     removePlayer: function(socket){
@@ -84,7 +85,7 @@ io.on('connection', function(socket){
   console.log('new connection from socket ' + socket.id);
 
   socket.on('login', function(username){
-    let player = Player.new(socket.id, username);
+    let player = new Player(socket.id, username);
     playerManager.addPlayer(socket, player);
     console.log(username + ' has logged in');
 

@@ -1,5 +1,19 @@
 'use strict';
-(function(){
+
+// TODO: Game client should be in a seperate file
+class GameClient{
+  constructor(url){
+    this.socket = io(url);
+  }
+
+  login(name){
+    console.log(this.name);
+    this.socket.emit('login', {
+      name: name
+    });
+  }
+}
+
 class Login extends React.Component{
 
   constructor(){
@@ -29,9 +43,8 @@ class Login extends React.Component{
     </div>;
   }
 }
-
 Login.displayName = "login";
-const client = new GameClient("localhost:3000");
+
+var client = new GameClient("localhost:3000");
 const root = document.getElementById('root');
-ReactDOM.render(<Login submit={client.login}/>, root);
-})();
+ReactDOM.render(<Login submit={client.login.bind(client)}/>, root);
