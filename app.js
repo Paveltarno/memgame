@@ -19,7 +19,6 @@ console.log(`Server started on port ${port}`);
 
 // HTTP server for static files
 function handler(req, res) {
-    console.log(req.headers);
     var url = req.url && req.url !== '/' ? req.url : '/index.html';
     if (url.indexOf('..') !== -1) {
         res.writeHead(403);
@@ -33,6 +32,9 @@ function handler(req, res) {
                 if (err) {
                     res.writeHead(500);
                     return res.end('Error loading resource');
+                }
+                if (/\.(css)$/.test(url)){
+                  res.setHeader("Content-Type", "text/css");
                 }
                 res.writeHead(200);
                 res.end(data);
@@ -91,4 +93,9 @@ io.on('connection', function(socket){
     // Send update message to everyone
     io.emit('update players', playerManager.listPlayers());
     });
+
+  socket.on('disconnect', function(){
+    playerManager.removePlayer(socket);
+    console.log('disconnected socket ' + socket.id);
+  });
 });
