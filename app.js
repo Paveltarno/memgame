@@ -80,22 +80,22 @@ var playerManager = (function(){
   };
 }());
 
-var counter = 0;
 io.on('connection', function(socket){
   console.log('new connection from socket ' + socket.id);
 
   socket.on('login', function(username){
     let player = Player.new(socket.id, username);
     playerManager.addPlayer(socket, player);
-    ++counter;
-    console.log(username + 'has logged in');
+    console.log(username + ' has logged in');
 
     // Send update message to everyone
     io.emit('update players', playerManager.listPlayers());
+    console.log('there are now ' + playerManager.listPlayers().length + ' players')
     });
 
   socket.on('disconnect', function(){
     playerManager.removePlayer(socket);
     console.log('disconnected socket ' + socket.id);
+    console.log('there are now ' + playerManager.listPlayers().length + ' players')
   });
 });

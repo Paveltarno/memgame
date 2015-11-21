@@ -4,6 +4,10 @@ class GameClient{
   constructor(url){
     this.socket = io(url);
   }
-}
 
-const client = new GameClient("localhost:3000");
+  login(name){
+    this.socket.emit('login', {
+      name: name
+    });
+  }
+}
