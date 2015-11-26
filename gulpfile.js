@@ -3,8 +3,7 @@
 var gulp = require('gulp');
 var sass = require('gulp-sass');
 var babel = require('gulp-babel');
-var webpack = require("webpack");
-var WebpackDevServer = require("webpack-dev-server");
+var gutil = require('gulp-util');
 
 gulp.task('sass', function () {
   gulp.src('./assets/stylesheets/**/*.scss')
@@ -20,7 +19,10 @@ gulp.task('javascript', function(){
     .pipe(gulp.dest('./public'));
 });
 
-gulp.task('default',function() {
-    gulp.watch('assets/stylesheets/**/*.scss',['sass']);
-    gulp.watch('assets/javascript/**/*.js', ['javascript']);
+gulp.task('watch',function() {
+
+  gulp.watch('assets/stylesheets/**/*.scss',['sass']);
+  gulp.watch('assets/javascript/**/*.js', ['javascript']);
 });
+
+gulp.task('default', ['sass', 'javascript', 'watch']);

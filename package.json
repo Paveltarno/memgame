@@ -21,8 +21,6 @@
     "babel-preset-react": "^6.1.18",
     "gulp": "^3.9.0",
     "gulp-babel": "^6.1.0",
-    "gulp-sass": "^2.1.0",
-    "webpack": "^1.12.9",
-    "webpack-dev-server": "^1.14.0"
+    "gulp-sass": "^2.1.0"
   }
 }

@@ -42,6 +42,7 @@ function handler(req, res) {
     }
 }
 
+// Player
 class Player{
   constructor(id, name){
     this.id;

@@ -1,5 +1,7 @@
 'use strict';
 
+import {GameClient} from "game_client";
+
 class Login extends React.Component{
 
   constructor(){
@@ -29,7 +31,6 @@ class Login extends React.Component{
     </div>;
   }
 }
-
 Login.displayName = "login";
 
 var client = new GameClient("localhost:3000");
