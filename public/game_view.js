@@ -29,7 +29,7 @@ var Login = (function (_React$Component) {
     key: 'handleSubmit',
     value: function handleSubmit(e) {
       e.preventDefault();
-      this.props.submit(e.target.value);
+      this.props.submit(this.state.name);
     }
   }, {
     key: 'render',
@@ -60,6 +60,8 @@ var Login = (function (_React$Component) {
 
 Login.displayName = "login";
 
-var client = new GameClient("localhost:3000");
-var root = document.getElementById('root');
-ReactDOM.render(React.createElement(Login, { submit: client.login.bind(client) }), root);
+$(function () {
+  var client = new GameClient("localhost:3000");
+  var root = document.getElementById('root');
+  ReactDOM.render(React.createElement(Login, { submit: client.login.bind(client) }), root);
+});

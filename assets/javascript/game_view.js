@@ -13,7 +13,7 @@ class Login extends React.Component{
 
   handleSubmit(e){
     e.preventDefault();
-    this.props.submit(e.target.value);
+    this.props.submit(this.state.name);
   }
 
   render(){
@@ -29,9 +29,10 @@ class Login extends React.Component{
     </div>;
   }
 }
-
 Login.displayName = "login";
 
-var client = new GameClient("localhost:3000");
-const root = document.getElementById('root');
-ReactDOM.render(<Login submit={client.login.bind(client)}/>, root);
+$(function(){
+  var client = new GameClient("localhost:3000");
+  const root = document.getElementById('root');
+  ReactDOM.render(<Login submit={client.login.bind(client)}/>, root);
+});

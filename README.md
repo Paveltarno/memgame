@@ -3,7 +3,6 @@ MEMGAME
 
 TODO
 ----
-- Add gulp for bable
-- Add gulp with connect.js
+- ~~Add gulp for bable~~
+- ~~Make babel run on the serverside~~
 - Add bower for skeleton
-- Add babel to run on serverside

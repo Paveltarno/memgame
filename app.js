@@ -24,34 +24,34 @@ function handler(req, res) {
         res.writeHead(403);
         return res.end('Error accessing resource');
     } else {
-        if (url.indexOf('/node_modules/') !== 0) {
-            url = '/public' + url;
-        }
-        fs.readFile(__dirname + url,
-            function (err, data) {
-                if (err) {
-                    res.writeHead(500);
-                    return res.end('Error loading resource');
-                }
-                if (/\.(css)$/.test(url)){
-                  res.setHeader("Content-Type", "text/css");
-                }
-                res.writeHead(200);
-                res.end(data);
-            });
+      if (url.indexOf('/node_modules/') !== 0) {
+          url = '/public' + url;
+      }
+      fs.readFile(__dirname + url,
+        function (err, data) {
+          if (err) {
+            res.writeHead(500);
+            return res.end('Error loading resource');
+          }
+          if (/\.(css)$/.test(url)){
+            res.setHeader("Content-Type", "text/css");
+          }
+          res.writeHead(200);
+          res.end(data);
+        });
     }
 }
 
 // Player
 class Player{
   constructor(id, name){
-    this.id;
-    this.name;
+    this.id = id;
+    this.name = name;
   }
 }
 
 // Game manager
-var playerManager = (function(){
+const PlayerManager = (function(){
   let sockets = new Map();
   let players = new Map();
 
@@ -77,7 +77,7 @@ var playerManager = (function(){
     },
 
     listPlayers: function(){
-      return Array.from(players.values);
+      return Array.from(players.values());
     }
   };
 }());
@@ -85,19 +85,19 @@ var playerManager = (function(){
 io.on('connection', function(socket){
   console.log('new connection from socket ' + socket.id);
 
-  socket.on('login', function(username){
+  socket.on('login', function(data){
+    let username = data.name;
     let player = new Player(socket.id, username);
-    playerManager.addPlayer(socket, player);
-    console.log(username + ' has logged in');
+    PlayerManager.addPlayer(socket, player);
 
     // Send update message to everyone
-    io.emit('update players', playerManager.listPlayers());
-    console.log('there are now ' + playerManager.listPlayers().length + ' players')
+    io.emit('update players', PlayerManager.listPlayers());
+    console.log('PlayerManager.listPlayers().length + ' player(s) connected')
     });
 
   socket.on('disconnect', function(){
-    playerManager.removePlayer(socket);
+    PlayerManager.removePlayer(socket);
     console.log('disconnected socket ' + socket.id);
-    console.log('there are now ' + playerManager.listPlayers().length + ' players')
+    console.log('PlayerManager.listPlayers().length + ' player(s) connected')
   });
 });
