@@ -1,13 +1,25 @@
-// 'use strict';
+'use strict';
 
-// class GameClient{
-//   constructor(url){
-//     this.socket = io(url);
-//   }
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 
-//   login(name){
-//     this.socket.emit('login', {
-//       name: name
-//     });
-//   }
-// }
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var GameClient = (function () {
+  function GameClient(url) {
+    _classCallCheck(this, GameClient);
+
+    this.socket = io(url);
+  }
+
+  _createClass(GameClient, [{
+    key: 'login',
+    value: function login(name) {
+      console.log(this.name);
+      this.socket.emit('login', {
+        name: name
+      });
+    }
+  }]);
+
+  return GameClient;
+})();
