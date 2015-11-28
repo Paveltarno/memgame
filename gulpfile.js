@@ -15,12 +15,11 @@ gulp.task('javascript', function(){
   gulp.src('./assets/javascript/**/*.js')
     .pipe(babel({
       presets: ['es2015', 'react']
-    }))
+    }).on('error', gutil.log))
     .pipe(gulp.dest('./public'));
 });
 
 gulp.task('watch',function() {
-
   gulp.watch('assets/stylesheets/**/*.scss',['sass']);
   gulp.watch('assets/javascript/**/*.js', ['javascript']);
 });
