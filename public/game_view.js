@@ -38,7 +38,7 @@ var Login = (function (_React$Component) {
 
       return React.createElement(
         'div',
-        { className: 'login' },
+        { id: 'login' },
         React.createElement(
           'h3',
           null,
@@ -58,10 +58,59 @@ var Login = (function (_React$Component) {
   return Login;
 })(React.Component);
 
-Login.displayName = "login";
+Login.displayName = "Login";
+
+var UserList = function UserList(_ref) {
+  var users = _ref.users;
+
+  return React.createElement(
+    'div',
+    { id: 'user-list' },
+    React.createElement(
+      'div',
+      null,
+      users.length + " user(s) connected"
+    )
+  );
+};
+UserList.displayName = "UserList";
+
+// Game is the main components
+
+var Game = (function (_React$Component2) {
+  _inherits(Game, _React$Component2);
+
+  function Game() {
+    _classCallCheck(this, Game);
+
+    return _possibleConstructorReturn(this, Object.getPrototypeOf(Game).apply(this, arguments));
+  }
+
+  _createClass(Game, [{
+    key: 'render',
+    value: function render() {
+      return React.createElement(
+        'div',
+        { id: 'game' },
+        React.createElement(Login, { submit: this.props.client.login }),
+        React.createElement(UserList, { users: this.props.users })
+      );
+    }
+  }]);
+
+  return Game;
+})(React.Component);
+
+Game.displayName = "Game";
 
 $(function () {
   var client = new GameClient("localhost:3000");
   var root = document.getElementById('root');
-  ReactDOM.render(React.createElement(Login, { submit: client.login.bind(client) }), root);
+  var users = [];
+
+  $(client).on("usersUpdate", function () {
+    ReactDOM.render(React.createElement(Game, { client: client, users: users }), root);
+  });
+
+  ReactDOM.render(React.createElement(Game, { client: client, users: users }), root);
 });

@@ -1,14 +1,17 @@
 'use strict';
 
-class GameClient{
-  constructor(url){
-    this.socket = io(url);
-  }
+function GameClient(url){
+  const socket = io(url);
 
-  login(name){
-    console.log(this.name);
-    this.socket.emit('login', {
+  this.login = function(name){
+    socket.emit('users:login', {
       name: name
     });
   }
+
+  socket
+    .on('users:update', (data) => {
+      $(this).trigger('usersUpdate');
+    });
 }
+

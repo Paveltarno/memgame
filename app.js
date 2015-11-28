@@ -85,19 +85,19 @@ const PlayerManager = (function(){
 io.on('connection', function(socket){
   console.log('new connection from socket ' + socket.id);
 
-  socket.on('login', function(data){
+  socket.on('users:login', function(data){
     let username = data.name;
     let player = new Player(socket.id, username);
     PlayerManager.addPlayer(socket, player);
 
     // Send update message to everyone
-    io.emit('update players', PlayerManager.listPlayers());
-    console.log('PlayerManager.listPlayers().length + ' player(s) connected')
-    });
+    io.emit('users:update', PlayerManager.listPlayers());
+    console.log(PlayerManager.listPlayers().length + ' player(s) connected')
+  });
 
   socket.on('disconnect', function(){
     PlayerManager.removePlayer(socket);
     console.log('disconnected socket ' + socket.id);
-    console.log('PlayerManager.listPlayers().length + ' player(s) connected')
+    console.log(PlayerManager.listPlayers().length + ' player(s) connected')
   });
 });
