@@ -4,16 +4,29 @@ class Login extends React.Component{
 
   constructor(){
     super();
-    this.state = {name: ""};
+    debugger;
+    this.state = {name: "", submitText: _submitText()};
   }
 
   handleChange(e){
-    this.setState({name: e.target.value});
+    this.setState({
+        name: e.target.value,
+        submitText: _submitText(e.target.value)
+      });
   }
 
   handleSubmit(e){
     e.preventDefault();
     this.props.submit(this.state.name);
+  }
+
+  _submitText(name = nil){
+    if(name){
+      return "Login as " + name
+    }
+    else{
+      return "Enter name to login"
+    }
   }
 
   render(){
@@ -22,9 +35,9 @@ class Login extends React.Component{
     return <div id='login'>
     <h3>Login</h3>
     <form onSubmit={this.handleSubmit.bind(this)}>
-      <input type="text" placeholder="What is your name?" name="username"
+      <input type="text" placeholder="What is your name?" className="username" name="username"
         value={name} onChange={this.handleChange.bind(this)}></input>
-      <input type="submit" value={"Login as " + name} disabled={!this.state.name} ></input>
+      <input type="submit" value={this.state.submitText} disabled={!this.state.name} ></input>
     </form>
     </div>;
   }
@@ -47,7 +60,6 @@ class Game extends React.Component{
     </div>;
   }
 }
-
 Game.displayName = "Game";
 
 $(function(){

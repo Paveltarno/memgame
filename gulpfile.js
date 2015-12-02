@@ -1,21 +1,28 @@
 "use strict";
 
-var gulp = require('gulp');
-var sass = require('gulp-sass');
-var babel = require('gulp-babel');
-var gutil = require('gulp-util');
+const gulp = require('gulp');
+const sass = require('gulp-sass');
+const babel = require('gulp-babel');
+const gutil = require('gulp-util');
+const sourcemaps = require('gulp-sourcemaps');
+const concat = require('gulp-concat');
 
 gulp.task('sass', function () {
   gulp.src('./assets/stylesheets/**/*.scss')
+    .pipe(sourcemaps.init())
     .pipe(sass().on('error', sass.logError))
+    .pipe(sourcemaps.write())
     .pipe(gulp.dest('./public'));
 });
 
 gulp.task('javascript', function(){
   gulp.src('./assets/javascript/**/*.js')
+    .pipe(sourcemaps.init())
     .pipe(babel({
       presets: ['es2015', 'react']
     }).on('error', gutil.log))
+    .pipe(concat('all.js'))
+    .pipe(sourcemaps.write('.'))
     .pipe(gulp.dest('./public'));
 });
 

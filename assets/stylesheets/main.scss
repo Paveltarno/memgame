@@ -1,6 +1,32 @@
 @import "./vendor/skeleton/css/normalize";
 @import "./vendor/skeleton/css/skeleton";
 
-heder{
+html{
+  font-size: 10px;
+}
+
+body{
+  font-size: 1.6rem;
+}
+
+header{
   text-align: center;
 }
+
+#page{
+  margin-left: 20%;
+  margin-right: 20%;
+}
+
+#login{
+  text-align: center;
+
+  .username{
+    text-align: center;
+    text-transform: uppercase;
+    display: block;
+    margin: auto;
+    margin-bottom: 1.5rem;
+  }
+}
+
